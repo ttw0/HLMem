@@ -1,0 +1,45 @@
+[project]
+name = "hlmem"
+version = "0.1.0"
+description = "Memory tool planner experiments for retrieval-focused SFT and planner-only GRPO."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "HLMem contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+data = [
+  "pandas>=2.0",
+  "pyarrow>=14.0",
+]
+train = [
+  "accelerate",
+  "datasets",
+  "einops",
+  "pandas>=2.0",
+  "pyarrow>=14.0",
+  "torch>=2.5",
+  "transformers>=4.51",
+]
+dev = [
+  "pandas>=2.0",
+  "pyarrow>=14.0",
+  "pytest>=8.0",
+]
+
+[project.scripts]
+mtp = "memory_tool_planner.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/memory_tool_planner"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

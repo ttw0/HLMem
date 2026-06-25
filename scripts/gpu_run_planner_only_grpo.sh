@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Planner-only GRPO: optimize tool selection and query construction by evidence
+# recall, without answer generation or answer-model judging.
+
+export MTP_SKIP_ANSWER_GENERATION="${MTP_SKIP_ANSWER_GENERATION:-1}"
+export MTP_REWARD_EVAL_MODE="${MTP_REWARD_EVAL_MODE:-lexical}"
+export MTP_REWARD_ANSWER_WEIGHT="${MTP_REWARD_ANSWER_WEIGHT:-0.0}"
+export MTP_REWARD_EVIDENCE_WEIGHT="${MTP_REWARD_EVIDENCE_WEIGHT:-1.0}"
+export MTP_REWARD_PARTIAL_ANSWER_WEIGHT="${MTP_REWARD_PARTIAL_ANSWER_WEIGHT:-0.0}"
+export MTP_REWARD_TOKEN_COST_WEIGHT="${MTP_REWARD_TOKEN_COST_WEIGHT:-0.0}"
+export MTP_REWARD_TOOL_COST_WEIGHT="${MTP_REWARD_TOOL_COST_WEIGHT:-0.0}"
+export MTP_REWARD_UNDER_TOOL_WEIGHT="${MTP_REWARD_UNDER_TOOL_WEIGHT:-0.0}"
+export MTP_REWARD_MIN_TOOL_COUNT="${MTP_REWARD_MIN_TOOL_COUNT:-0}"
+export MTP_MEMORY_TOKEN_BUDGET="${MTP_MEMORY_TOKEN_BUDGET:-0}"
+export MTP_RETRIEVAL_TOP_K="${MTP_RETRIEVAL_TOP_K:-5}"
+export MTP_ANSWER_PROMPT_STYLE="${MTP_ANSWER_PROMPT_STYLE:-concise}"
+
+exec bash scripts/gpu_run_grpo_verl.sh "$@"
